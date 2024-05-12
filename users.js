@@ -5,10 +5,11 @@ import cron from 'node-cron';
 import dotenv from 'dotenv'
 import session from 'express-session';
 const app = express();
+import cors from "cors";
 import connectDB from "./config/db.js";
-const PORT = process.env.PORT || 1999;
 dotenv.config();
-connectDB()
+const PORT = process.env.PORT || 1999;
+connectDB(process.env.MONGO_URL)
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.listen(PORT, () => {
@@ -16,7 +17,13 @@ app.listen(PORT, () => {
 });
 import userRoutes from "./routes/userRoutes.js";
 
-app.use(cors());
+
+const corsOrigin ={
+    origin:'http://localhost:5173', //or whatever port your frontend is using
+    credentials:true,            
+    optionSuccessStatus:200
+}
+app.use(cors(corsOrigin));
 app.use("/user", userRoutes);
 
 
