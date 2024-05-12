@@ -5,7 +5,6 @@ import cron from 'node-cron';
 import dotenv from 'dotenv'
 import session from 'express-session';
 const app = express();
-import cors from "cors";
 import connectDB from "./config/db.js";
 dotenv.config();
 const PORT = process.env.PORT || 1999;
