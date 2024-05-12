@@ -6,9 +6,10 @@ import dotenv from 'dotenv'
 import session from 'express-session';
 const app = express();
 import connectDB from "./config/db.js";
-const PORT = process.env.PORT || 1999;
 dotenv.config();
-connectDB()
+const PORT = process.env.PORT || 1999;
+
+connectDB(process.env.MONGO_URL)
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.listen(PORT, () => {
