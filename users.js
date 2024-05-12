@@ -17,7 +17,13 @@ app.listen(PORT, () => {
 });
 import userRoutes from "./routes/userRoutes.js";
 
-app.use(cors());
+app.use(cors({
+  origin: "*",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  // allowedHeaders: ["Content-Type", "Accept"],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+}));
 app.use("/user", userRoutes);
 
 
